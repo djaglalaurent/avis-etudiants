@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme Avis Étudiants</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Plateforme Avis Étudiants</h1>
+            <p>Votre opinion compte - Aidez-nous à nous améliorer</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('formulaire')">📝 Donner mon avis</button>
+            <button class="tab" onclick="showAdminTab()">🔐 Accès Admin</button>
+        </div>
+
+        <!-- ONGLET FORMULAIRE -->
+        <div id="formulaire" class="tab-content active">
+            <form id="avisForm" class="avis-form">
+                <div class="form-group">
+                    <label for="email">Email (optionnel) :</label>
+                    <input type="email" id="email" name="email" placeholder="votre@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="domaine">Domaine d'activité concerné :</label>
+                    <select id="domaine" name="domaine" required>
+                        <option value="">Sélectionnez un domaine</option>
+                        <option value="formations">Formations & Ateliers</option>
+                        <option value="evenements">Événements sociaux</option>
+                        <option value="soutien">Soutien académique</option>
+                        <option value="communication">Communication</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Note globale de satisfaction :</label>
+                    <div class="note-container">
+                        <div class="note-options">
+                            <label class="note-option"><input type="radio" name="note" value="1" required><span>1</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="2" required><span>2</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="3" required><span>3</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="4" required><span>4</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="5" required><span>5</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="6" required><span>6</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="7" required><span>7</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="8" required><span>8</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="9" required><span>9</span></label>
+                            <label class="note-option"><input type="radio" name="note" value="10" required><span>10</span></label>
+                        </div>
+                        <div class="note-labels">
+                            <span>Pas satisfait</span>
+                            <span>Très satisfait</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="points_positifs">Points positifs :</label>
+                    <textarea id="points_positifs" name="points_positifs" placeholder="Qu'avez-vous apprécié ? Qu'est-ce qui fonctionne bien ?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="points_amelioration">Points à améliorer :</label>
+                    <textarea id="points_amelioration" name="points_amelioration" placeholder="Que pouvons-nous améliorer ? Vos suggestions..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questions">Questions ou remarques supplémentaires :</label>
+                    <textarea id="questions" name="questions" placeholder="Avez-vous des questions particulières ?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Soumettre mon avis</button>
+            </form>
+
+            <div id="confirmation" class="confirmation hidden">
+                <h2>✅ Merci pour votre contribution !</h2>
+                <p>Votre avis a été enregistré et sera pris en compte.</p>
+                <div class="data-preview">
+                    <h3>📋 Aperçu de vos réponses :</h3>
+                    <div id="dataPreview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET ADMIN -->
+        <div id="admin" class="tab-content">
+            <div class="stats-grid" id="statsGrid">
+                <!-- Les statistiques seront générées ici -->
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="export-btn" onclick="exportJSON()">📥 Exporter JSON</button>
+                <button class="export-btn" onclick="exportCSV()">📊 Exporter CSV</button>
+                <button class="export-btn" onclick="clearData()" style="background: #dc3545;">🗑️ Effacer données</button>
+                <button class="export-btn" onclick="genererRapport()" style="background: #6f42c1;">📄 Générer Rapport</button>
+            </div>
+
+            <!-- NOUVEAU : FILTRES -->
+            <div class="filters" style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                <h4 style="margin-bottom: 10px;">🔍 Filtres :</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <select id="filterDomaine" onchange="appliquerFiltres()" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                        <option value="">Tous les domaines</option>
+                        <option value="formations">Formations</option>
+                        <option value="evenements">Événements</option>
+                        <option value="soutien">Soutien</option>
+                        <option value="communication">Communication</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <select id="filterNote" onchange="appliquerFiltres()" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                        <option value="">Toutes les notes</option>
+                        <option value="1-3">Notes 1-3 (Critiques)</option>
+                        <option value="4-6">Notes 4-6 (Moyennes)</option>
+                        <option value="7-10">Notes 7-10 (Positives)</option>
+                    </select>
+                    <select id="filterReponse" onchange="appliquerFiltres()" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                        <option value="">Tous les avis</option>
+                        <option value="avec">Avec réponse</option>
+                        <option value="sans">Sans réponse</option>
+                    </select>
+                    <button onclick="reinitialiserFiltres()" style="padding: 8px 15px; background: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔄 Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <div class="avis-list" id="avisList">
+                <!-- Liste des avis avec système de réponses -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
