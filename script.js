@@ -20,7 +20,7 @@ form.addEventListener('submit', function(e){
 
     form.reset();
 
-    // ✅ Message de confirmation uniquement
+    //  Message de confirmation uniquement
     const conf = document.getElementById('confirmation');
     conf.classList.remove('hidden');
     setTimeout(()=> conf.classList.add('hidden'), 4000);
@@ -29,7 +29,7 @@ form.addEventListener('submit', function(e){
 // ADMIN PANEL
 const adminList = document.getElementById('adminList');
 
-// ✅ AFFICHAGE UNIQUEMENT APRÈS RECHERCHE
+//  AFFICHAGE UNIQUEMENT APRÈS RECHERCHE
 function renderAdminList(list){
     adminList.innerHTML = '';
 
@@ -53,7 +53,7 @@ function deleteParticipant(index){
     if(confirm("Voulez-vous vraiment supprimer ce participant ?")){
         participants.splice(index,1);
         localStorage.setItem('participants', JSON.stringify(participants));
-        adminList.innerHTML = ""; // ✅ on vide après suppression
+        adminList.innerHTML = ""; //  on vide après suppression
     }
 }
 
@@ -71,3 +71,4 @@ function searchParticipant(){
 
     renderAdminList(filtered);
 }
+
