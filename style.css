@@ -149,7 +149,7 @@ body {
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-color: #900c3f;
+    background-color: pink;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -168,7 +168,7 @@ body {
     border: 1px solid #ffb6b9;
     border-radius: 10px;
     margin-bottom: 10px;
-    background: #ffe4e1;
+    background: #ec8c82;
 }
 
 .admin-list .participant button {
