@@ -1,9 +1,17 @@
-// script.js (remplacer entièrement)
+// Gestion des tabs (si besoin plus tard)
+function showTab(tabName){
+    const tabs = document.querySelectorAll('.tab-content');
+    const tabButtons = document.querySelectorAll('.tab');
+    tabs.forEach(t=>t.classList.remove('active'));
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    const tab = document.getElementById(tabName);
+    if(tab) tab.classList.add('active');
+}
 
-// Chargement des participants depuis localStorage
+// Stockage participants
 let participants = JSON.parse(localStorage.getItem('participants')) || [];
 
-// FORMULAIRE : ajout d'un participant (n'affiche rien côté admin)
+// FORMULAIRE
 const form = document.getElementById('picnicForm');
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -20,93 +28,93 @@ form.addEventListener('submit', function(e){
     participants.push(participant);
     localStorage.setItem('participants', JSON.stringify(participants));
 
-    // reset form et confirmation visuelle
     form.reset();
-    const conf = document.getElementById('confirmation');
-    if(conf){
-      conf.classList.remove('hidden');
-      setTimeout(()=> conf.classList.add('hidden'), 4000);
-    }
 
-    // NE PAS afficher automatiquement la liste côté admin
+    const conf = document.getElementById('confirmation');
+    conf.classList.remove('hidden');
+    setTimeout(()=> conf.classList.add('hidden'), 4000);
+
+    // ✅ IMPORTANT : on n’affiche RIEN après soumission
+    adminList.innerHTML = '';
 });
 
-// RÉFÉRENCE DOM admin
+// ADMIN PANEL
 const adminList = document.getElementById('adminList');
 const searchInput = document.getElementById('searchName');
 
-// Fonction pour rendre la liste à partir d'un tableau d'objets {p,index}
-function renderMatches(matches){
+// ✅ Quand on vide le champ de recherche → la liste disparaît automatiquement
+searchInput.addEventListener('input', function () {
+    if (this.value.trim() === '') {
+        adminList.innerHTML = '';
+    }
+});
+
+// ❌ On garde la fonction mais elle ne s’utilise PLUS au chargement
+function renderAdminList(filtered = null){
+    const list = filtered || participants;
     adminList.innerHTML = '';
-
-    // Si pas de matches : ne rien afficher (comportement demandé)
-    if(!matches || matches.length === 0) return;
-
-    matches.forEach(item => {
-        const p = item.p;
-        const idx = item.index; // index réel dans participants
+    list.forEach((p,i)=>{
         const div = document.createElement('div');
         div.className = 'participant';
         div.innerHTML = `
-            <span>${escapeHtml(p.nom)} ${escapeHtml(p.prenom)} - ${escapeHtml(p.annee)} - ${escapeHtml(p.filiere)} - ${escapeHtml(p.telephone)} - ${escapeHtml(p.montant)} CFA</span>
-            <button onclick="deleteParticipant(${idx})">Supprimer</button>
+            <span>${p.nom} ${p.prenom} - ${p.annee} - ${p.filiere} - ${p.telephone} - ${p.montant} CFA</span>
+            <button onclick="deleteParticipant(${i})">Supprimer</button>
         `;
         adminList.appendChild(div);
     });
 }
 
-// Supprimer participant (index réel dans participants)
 function deleteParticipant(index){
-    if(!Number.isInteger(index) || index < 0 || index >= participants.length) return;
     if(confirm("Voulez-vous vraiment supprimer ce participant ?")){
         participants.splice(index,1);
         localStorage.setItem('participants', JSON.stringify(participants));
-        // Après suppression, relancer la recherche actuelle pour rafraîchir l'affichage
-        const currentQuery = (searchInput && searchInput.value) ? searchInput.value.trim() : '';
-        if(currentQuery === ''){
-            adminList.innerHTML = ''; // si champ vide, on doit rester vide
-        } else {
-            // relancer recherche pour afficher résultat mis à jour (ou vide si plus de correspondances)
-            performSearchAndRender(currentQuery);
-        }
+        adminList.innerHTML = ''; // ✅ on vide après suppression
     }
 }
 
-// Recherche déclenchée manuellement (bouton) ou par appel
+// ✅ RECHERCHE : affiche seulement si on clique sur Rechercher
 function searchParticipant(){
-    const query = (searchInput && searchInput.value) ? searchInput.value.trim() : '';
-    if(query === ''){
-        // Champ vide => on n'affiche rien
+    const name = searchInput.value.trim().toLowerCase();
+
+    // ✅ Si champ vide → on vide tout
+    if(name === ''){
         adminList.innerHTML = '';
         return;
     }
-    performSearchAndRender(query);
-}
 
-// Fonction utilitaire : effectuer recherche et appeler renderMatches
-function performSearchAndRender(query){
-    const q = query.toLowerCase();
-    // On récupère les correspondances et leurs index réels dans participants
     const matches = participants
-        .map((p, idx) => ({p, idx}))
-        .filter(item => {
-            const full = (item.p.nom + ' ' + item.p.prenom).toLowerCase();
-            return full.includes(q);
-        })
-        .map(it => ({ p: it.p, index: it.idx }));
+        .map((p, index) => ({ p, index }))
+        .filter(item => 
+            (item.p.nom + ' ' + item.p.prenom)
+            .toLowerCase()
+            .includes(name)
+        );
 
-    // Si aucun match, on n'affiche rien (comportement demandé)
+    // ✅ Aucun résultat → on n'affiche rien
     if(matches.length === 0){
         adminList.innerHTML = '';
         return;
     }
 
-    renderMatches(matches);
+    adminList.innerHTML = '';
+
+    matches.forEach(item => {
+        const p = item.p;
+        const i = item.index;
+
+        const div = document.createElement('div');
+        div.className = 'participant';
+        div.innerHTML = `
+            <span>${p.nom} ${p.prenom} - ${p.annee} - ${p.filiere} - ${p.telephone} - ${p.montant} CFA</span>
+            <button onclick="deleteParticipant(${i})">Supprimer</button>
+        `;
+        adminList.appendChild(div);
+    });
 }
 
-// Export JSON (si tu veux garder ces fonctions)
+// Export JSON
 function exportJSON(){
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(participants, null, 2));
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(participants));
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute("href", dataStr);
     dlAnchor.setAttribute("download","participants.json");
@@ -116,31 +124,14 @@ function exportJSON(){
 // Export CSV
 function exportCSV(){
     if(!participants.length) return;
-    const headers = ['nom','prenom','annee','filiere','telephone','montant'];
-    const rows = participants.map(p => headers.map(h => `"${(p[h]||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
-    const csvStr = "data:text/csv;charset=utf-8," + encodeURIComponent(headers.join(',') + '\n' + rows);
+    const headers = Object.keys(participants[0]).join(',');
+    const rows = participants.map(p=>Object.values(p).join(',')).join('\n');
+    const csvStr = "data:text/csv;charset=utf-8," + encodeURIComponent(headers + '\n' + rows);
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute("href", csvStr);
     dlAnchor.setAttribute("download","participants.csv");
     dlAnchor.click();
 }
 
-// Petit helper pour éviter injection dans le DOM (sécurité basique)
-function escapeHtml(text){
-    if(!text) return '';
-    return text.replace(/[&<>"'`=\/]/g, function (s) {
-        return ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;',
-            '/': '&#x2F;',
-            '`': '&#x60;',
-            '=': '&#x3D;'
-        })[s];
-    });
-}
-
-// Au chargement de la page, on laisse l'adminList vide (conforme)
+// ✅ AUCUN affichage automatique AU CHARGEMENT
 adminList.innerHTML = '';
