@@ -1,42 +1,41 @@
-/* ===== RESET ===== */
+/* RESET */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #e0f0ff 0%, #f9fafc 100%);
+    background: #e6f0ff;
     color: #111;
     width: 100%;
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 20px auto;
+    padding: 0 15px;
 }
 
-/* ===== HEADER ===== */
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    color: #062a66;
     font-size: 28px;
+    color: #062a66;
     margin-bottom: 5px;
 }
 
 header p {
-    color: #1fbf4a;
-    font-size: 18px;
+    font-size: 16px;
+    color: #062a66;
 }
 
-/* ===== TABS ===== */
+/* TABS */
 .tabs {
     display: flex;
     justify-content: center;
@@ -46,63 +45,54 @@ header p {
 
 .tab {
     padding: 10px 20px;
+    border: 2px solid #062a66;
+    border-radius: 8px;
+    background: white;
     cursor: pointer;
-    background: #062a66;
-    color: #fff;
-    border-radius: 6px;
     transition: 0.3s;
-    font-weight: bold;
 }
 
-.tab:hover {
-    background: #1fbf4a;
-    color: #062a66;
+.tab.active, .tab:hover {
+    background: #062a66;
+    color: white;
 }
 
-.tab.active {
-    background: #1fbf4a;
-    color: #062a66;
-}
-
-/* ===== FORMULAIRE ===== */
-form {
-    background: #ffffff;
-    padding: 25px;
+/* FORMULAIRE */
+.picnic-form {
+    background: white;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .form-group {
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
 }
 
 .form-group label {
+    display: block;
     margin-bottom: 5px;
     font-weight: 600;
-    color: #062a66;
 }
 
-.form-group input,
-.form-group select {
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
     transition: 0.3s;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #1fbf4a;
+.form-group input:focus, .form-group select:focus {
+    border-color: #062a66;
+    box-shadow: 0 0 5px rgba(6,42,102,0.3);
     outline: none;
-    box-shadow: 0 0 8px rgba(31,191,74,0.3);
 }
 
 .submit-btn {
     background: #062a66;
-    color: #fff;
+    color: white;
     border: none;
     padding: 12px 20px;
     font-weight: 700;
@@ -112,91 +102,103 @@ form {
 }
 
 .submit-btn:hover {
-    background: #1fbf4a;
-    color: #062a66;
+    background: #1b3a99;
 }
 
-/* ===== CONFIRMATION ===== */
+/* CONFIRMATION */
 .confirmation {
-    background: #f1faff;
-    padding: 20px;
-    border-radius: 10px;
     margin-top: 20px;
-    border: 2px solid #1fbf4a;
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
 }
 
 .confirmation h2 {
     color: #062a66;
 }
 
-.confirmation p {
+/* ADMIN PANEL */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.admin-actions {
+    text-align: center;
     margin-bottom: 15px;
-}
-
-/* ===== ADMIN PANEL ===== */
-#admin {
-    margin-top: 20px;
-}
-
-.stats-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
 }
 
 .export-btn {
     background: #062a66;
-    color: #fff;
+    color: white;
     border: none;
-    padding: 10px 18px;
+    padding: 10px 16px;
+    margin: 5px;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
-    margin: 5px;
 }
 
 .export-btn:hover {
-    background: #1fbf4a;
-    color: #062a66;
+    background: #1b3a99;
 }
 
-/* ===== LISTE PARTICIPANTS ===== */
-.avis-list {
-    margin-top: 20px;
-    background: #ffffff;
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.participant-list {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.avis-list .participant {
+.participant-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px 5px;
-    border-bottom: 1px solid #ccc;
+    align-items: center;
+    padding: 8px 5px;
+    border-bottom: 1px solid #eee;
 }
 
-.avis-list .participant:last-child {
+.participant-item:last-child {
     border-bottom: none;
 }
 
-.avis-list button.delete-btn {
+.delete-btn {
     background: #dc3545;
-    color: #fff;
+    color: white;
     border: none;
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.avis-list button.delete-btn:hover {
-    background: #b71c1c;
+.delete-btn:hover {
+    background: #a71d2a;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media screen and (max-width: 768px) {
     .tabs {
         flex-direction: column;
+    }
+    .tab {
+        width: 100%;
     }
 }
