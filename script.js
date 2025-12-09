@@ -1,18 +1,17 @@
-// Gestion des tabs
+// Gestion des tabs (si besoin plus tard)
 function showTab(tabName){
     const tabs = document.querySelectorAll('.tab-content');
     const tabButtons = document.querySelectorAll('.tab');
     tabs.forEach(t=>t.classList.remove('active'));
     tabButtons.forEach(b=>b.classList.remove('active'));
-
-    document.getElementById(tabName).classList.add('active');
-    event.target.classList.add('active');
+    const tab = document.getElementById(tabName);
+    if(tab) tab.classList.add('active');
 }
 
-// Stockage des participants
+// Stockage participants
 let participants = JSON.parse(localStorage.getItem('participants')) || [];
 
-// Formulaire
+// FORMULAIRE
 const form = document.getElementById('picnicForm');
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -30,8 +29,9 @@ form.addEventListener('submit', function(e){
     localStorage.setItem('participants', JSON.stringify(participants));
 
     form.reset();
-    document.getElementById('confirmation').classList.remove('hidden');
-    setTimeout(()=> document.getElementById('confirmation').classList.add('hidden'), 4000);
+    const conf = document.getElementById('confirmation');
+    conf.classList.remove('hidden');
+    setTimeout(()=> conf.classList.add('hidden'), 4000);
 
     renderAdminList();
 });
@@ -61,7 +61,6 @@ function deleteParticipant(index){
     }
 }
 
-// Rechercher un participant
 function searchParticipant(){
     const name = document.getElementById('searchName').value.toLowerCase().trim();
     const filtered = participants.filter(p => (p.nom + ' ' + p.prenom).toLowerCase().includes(name));
