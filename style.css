@@ -1,4 +1,4 @@
-/* RESET */
+/* ===== RESET ===== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,68 +7,81 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ffd2d2, #ffe4e1); /* Rose doux */
+    background: linear-gradient(135deg, #ffe7a1, #d4f5d4); /* Dégradé "picnic" soleil + herbe */
     color: #333;
     min-height: 100vh;
-    padding: 20px;
 }
 
-/* CADRANT PLATEFORME */
-.platform-card {
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-    background: #ffb6b9;
-    padding: 30px;
-    border-radius: 20px;
+/* ===== HEADER ===== */
+header {
     text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 30px 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.platform-card h1 {
-    font-size: 28px;
-    color: #900c3f;
+header h1 {
+    color: #2b7a0b;
     margin-bottom: 10px;
 }
 
-.platform-card p {
-    font-size: 16px;
-    color: #5a1f2b;
+header p {
+    color: #555;
 }
 
-/* FORMULAIRE CARD */
-.form-card {
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-    background: #ffe4e1;
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.tab {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #d4f5d4;
+    color: #2b7a0b;
+    transition: 0.3s;
+}
+
+.tab.active, .tab:hover {
+    background-color: #2b7a0b;
+    color: white;
+}
+
+/* ===== FORMULAIRE ===== */
+.picnic-form {
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px;
-    border-radius: 20px;
+    margin: 0 auto 30px auto;
+    max-width: 700px;
+    border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-.form-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #900c3f;
-    margin-bottom: 20px;
-}
-
-/* FORMULAIRE */
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .form-group label {
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     font-weight: bold;
-    color: #900c3f;
+    color: #2b7a0b;
 }
 
 .form-group input,
 .form-group select {
     padding: 12px 15px;
-    border: 2px solid #ffb6b9;
+    border: 2px solid #d4f5d4;
     border-radius: 10px;
     font-size: 16px;
     transition: 0.3s;
@@ -77,12 +90,12 @@ body {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #900c3f;
-    box-shadow: 0 0 8px rgba(144, 12, 63, 0.4);
+    border-color: #2b7a0b;
+    box-shadow: 0 0 8px rgba(43, 122, 11, 0.4);
 }
 
 .submit-btn {
-    background-color: #900c3f;
+    background-color: #2b7a0b;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -94,81 +107,80 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #6e0830;
+    background-color: #1e5507;
 }
 
-/* CONFIRMATION */
+/* ===== CONFIRMATION ===== */
 .confirmation {
     text-align: center;
     padding: 20px;
-    background: #ffdad9;
-    border: 2px solid #900c3f;
+    background: #e6f7e6;
+    border: 2px solid #2b7a0b;
     border-radius: 12px;
-    color: #900c3f;
+    color: #2b7a0b;
     margin-top: 20px;
 }
 
-.hidden { display: none; }
+.hidden {
+    display: none;
+}
 
-/* ADMIN CARD */
-.admin-card {
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-    background: #ffb6b9;
+/* ===== ADMIN PANEL ===== */
+.admin-section {
+    max-width: 800px;
+    margin: 20px auto;
     padding: 25px;
-    border-radius: 20px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-.admin-card h2 {
-    color: #900c3f;
-    margin-bottom: 20px;
-}
-
-/* RECHERCHE */
 .search-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .search-group input {
     flex: 1;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid #ffb6b9;
+    border: 2px solid #d4f5d4;
     transition: 0.3s;
 }
 
 .search-group input:focus {
-    border-color: #900c3f;
-    box-shadow: 0 0 6px rgba(144,12,63,0.4);
+    border-color: #2b7a0b;
+    box-shadow: 0 0 6px rgba(43,122,11,0.4);
 }
 
 .search-group button {
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-color: #900c3f;
+    background-color: #2b7a0b;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
 .search-group button:hover {
-    background-color: #6e0830;
+    background-color: #1e5507;
 }
 
-/* LISTE PARTICIPANTS */
+.admin-list {
+    margin-top: 15px;
+}
+
 .admin-list .participant {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    border: 1px solid #ffb6b9;
+    border: 1px solid #d4f5d4;
     border-radius: 10px;
     margin-bottom: 10px;
-    background: #ffe4e1;
+    background: #f9fff9;
 }
 
 .admin-list .participant button {
@@ -194,17 +206,17 @@ body {
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-color: #900c3f;
+    background-color: #2b7a0b;
     color: white;
     cursor: pointer;
     font-weight: bold;
 }
 
 .export-buttons button:hover {
-    background-color: #6e0830;
+    background-color: #1e5507;
 }
 
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media screen and (max-width: 768px){
     .search-group {
         flex-direction: column;
@@ -212,5 +224,10 @@ body {
     .search-group button {
         width: 100%;
     }
+    .tabs {
+        flex-direction: column;
+    }
+    .tab {
+        width: 100%;
+    }
 }
-
