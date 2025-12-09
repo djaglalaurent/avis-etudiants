@@ -42,7 +42,7 @@ body {
     background: #900c3f;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: rgb(235, 152, 166);
+    box-shadow: 0 6px 15px rgb(235, 152, 166); /* ✅ CORRECTION ICI */
 }
 
 .form-title {
@@ -213,6 +213,3 @@ body {
         width: 100%;
     }
 }
-
-
-
