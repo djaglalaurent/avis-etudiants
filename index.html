@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plateforme Picnic Étudiants</title>
+    <title>Plateforme Picnic Étudiants 2025</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -20,24 +22,24 @@
         <button class="tab" onclick="showTab('admin')">Accès Admin</button>
     </div>
 
-    <!-- ------------------------ FORMULAIRE INSCRIPTION -------------------- -->
+    <!-- FORMULAIRE INSCRIPTION -->
     <div id="formulaire" class="tab-content active">
-        <form id="picnicForm" class="avis-form">
+        <form id="picnicForm" class="picnic-form">
 
             <div class="form-group">
-                <label>Nom</label>
-                <input type="text" id="nom" required placeholder="Ex : DJAGLA">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" required>
             </div>
 
             <div class="form-group">
-                <label>Prénom</label>
-                <input type="text" id="prenom" required placeholder="Ex : Laurent">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" required>
             </div>
 
             <div class="form-group">
-                <label>Année d'étude</label>
+                <label for="annee_etude">Année d'étude</label>
                 <select id="annee_etude" required>
-                    <option value="" disabled selected>Choisir l'année</option>
+                    <option value="">Sélectionnez votre année</option>
                     <option value="Licence 1">Licence 1</option>
                     <option value="Licence 2">Licence 2</option>
                     <option value="Licence 3">Licence 3</option>
@@ -45,34 +47,32 @@
                     <option value="Master 2">Master 2</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
-                <label>Filière</label>
+                <label for="filiere">Filière</label>
                 <select id="filiere" required>
-                    <option value="" disabled selected>Choisir la filière</option>
+                    <option value="">Sélectionnez votre filière</option>
                     <option value="Statistique Appliquée">Statistique Appliquée</option>
                     <option value="Planification et Suivi-Evaluation">Planification et Suivi-Evaluation</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Numéro WhatsApp</label>
-                <input type="text" id="telephone" required placeholder="Ex : +229 0165368562">
+                <label for="telephone">Numéro WhatsApp</label>
+                <input type="tel" id="telephone" required pattern="[0-9+ ]+" placeholder="+229 ...">
             </div>
 
             <div class="form-group">
-                <label>Montant payé (CFA)</label>
-                <input type="number" id="montant" required placeholder="Ex : 2000">
+                <label for="montant">Montant payé (CFA)</label>
+                <input type="number" id="montant" required min="0">
             </div>
 
             <button type="submit" class="submit-btn">Enregistrer</button>
-
         </form>
 
         <div id="confirmation" class="confirmation hidden">
             <h2>Inscription enregistrée</h2>
             <p>Votre participation a bien été prise en compte.</p>
-
             <div class="data-preview">
                 <h3>Détails enregistrés</h3>
                 <div id="dataPreview"></div>
@@ -80,21 +80,21 @@
         </div>
     </div>
 
-    <!-- ------------------------ ADMIN PANEL -------------------- -->
+    <!-- ADMIN PANEL -->
     <div id="admin" class="tab-content">
-        <div style="margin-bottom:20px;">
-            <input id="searchName" placeholder="Rechercher un participant..." 
-                   style="width:100%; padding:12px; margin-bottom:10px; border-radius:6px; border:2px solid #ccc;">
-        </div>
-
-        <div style="text-align:center; margin-bottom:20px;">
+        <div class="admin-actions">
             <button class="export-btn" onclick="exportJSON()">Exporter JSON</button>
             <button class="export-btn" onclick="exportCSV()">Exporter CSV</button>
-            <button class="export-btn" onclick="clearData()" style="background:#dc3545;">Effacer toutes les données</button>
+        </div>
+
+        <div class="search-container">
+            <h3>Vérification pour entrée</h3>
+            <input id="searchName" placeholder="Tapez un nom..." oninput="searchParticipant()">
+            <div id="resultSearch"></div>
         </div>
 
         <h3>Liste des participants</h3>
-        <div class="avis-list" id="avisList"></div>
+        <div class="participant-list" id="participantList"></div>
     </div>
 
 </div>
