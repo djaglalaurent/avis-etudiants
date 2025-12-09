@@ -22,20 +22,17 @@
         <button class="tab" onclick="showTab('admin')">Accès Admin</button>
     </div>
 
-    <!-- FORMULAIRE INSCRIPTION -->
+    <!-- FORMULAIRE -->
     <div id="formulaire" class="tab-content active">
         <form id="picnicForm" class="picnic-form">
-
             <div class="form-group">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" required>
             </div>
-
             <div class="form-group">
                 <label for="prenom">Prénom</label>
                 <input type="text" id="prenom" required>
             </div>
-
             <div class="form-group">
                 <label for="annee_etude">Année d'étude</label>
                 <select id="annee_etude" required>
@@ -47,7 +44,6 @@
                     <option value="Master 2">Master 2</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="filiere">Filière</label>
                 <select id="filiere" required>
@@ -56,45 +52,37 @@
                     <option value="Planification et Suivi-Evaluation">Planification et Suivi-Evaluation</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="telephone">Numéro WhatsApp</label>
-                <input type="tel" id="telephone" required pattern="[0-9+ ]+" placeholder="+229 ...">
+                <input type="tel" id="telephone" required pattern="[0-9+ ]+">
             </div>
-
             <div class="form-group">
                 <label for="montant">Montant payé (CFA)</label>
                 <input type="number" id="montant" required min="0">
             </div>
-
             <button type="submit" class="submit-btn">Enregistrer</button>
         </form>
 
         <div id="confirmation" class="confirmation hidden">
-            <h2>Inscription enregistrée</h2>
-            <p>Votre participation a bien été prise en compte.</p>
-            <div class="data-preview">
-                <h3>Détails enregistrés</h3>
-                <div id="dataPreview"></div>
-            </div>
+            <h2>Inscription réussie ! 🎉</h2>
+            <p>Votre participation au picnic a été enregistrée.</p>
         </div>
     </div>
 
     <!-- ADMIN PANEL -->
     <div id="admin" class="tab-content">
-        <div class="admin-actions">
-            <button class="export-btn" onclick="exportJSON()">Exporter JSON</button>
-            <button class="export-btn" onclick="exportCSV()">Exporter CSV</button>
+        <div class="admin-section">
+            <h2>Gestion des participants</h2>
+            <div class="search-group">
+                <input type="text" id="searchName" placeholder="Tapez un nom pour rechercher">
+                <button onclick="searchParticipant()">Rechercher</button>
+            </div>
+            <div id="adminList" class="admin-list"></div>
+            <div class="export-buttons">
+                <button onclick="exportJSON()">Exporter JSON</button>
+                <button onclick="exportCSV()">Exporter CSV</button>
+            </div>
         </div>
-
-        <div class="search-container">
-            <h3>Vérification pour entrée</h3>
-            <input id="searchName" placeholder="Tapez un nom..." oninput="searchParticipant()">
-            <div id="resultSearch"></div>
-        </div>
-
-        <h3>Liste des participants</h3>
-        <div class="participant-list" id="participantList"></div>
     </div>
 
 </div>
