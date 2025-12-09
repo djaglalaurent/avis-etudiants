@@ -94,7 +94,7 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: black;
+    background-color: #000;
 }
 
 /* CONFIRMATION */
@@ -156,7 +156,7 @@ body {
 }
 
 .search-group button:hover {
-    background-color: black;
+    background-color: #000;
 }
 
 /* LISTE PARTICIPANTS */
@@ -213,3 +213,4 @@ body {
         width: 100%;
     }
 }
+
