@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plateforme Picnic Étudiants 2025</title>
+    <title style="color:white";>Plateforme Picnic Étudiants 2025</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,28 +13,28 @@
 <div class="container">
 
     <header>
-        <h1>Plateforme Picnic Étudiants 2025</h1>
-        <p>Inscription et gestion des participants</p>
+        <h1 style="color:white";>Plateforme Picnic Étudiants 2025</h1>
+        <p style="color:white";>Inscription et gestion des participants</p>
     </header>
 
     <div class="tabs">
-        <button class="tab active" onclick="showTab('formulaire')">Inscription</button>
-        <button class="tab" onclick="showTab('admin')">Accès Admin</button>
+        <button class="tab active" onclick="showTab('formulaire')" style="color:white";>Inscription</button>
+        <button class="tab" onclick="showTab('admin')" style="color:white";>Accès Admin</button>
     </div>
 
     <!-- FORMULAIRE -->
     <div id="formulaire" class="tab-content active">
         <form id="picnicForm" class="picnic-form">
             <div class="form-group">
-                <label for="nom">Nom</label>
+                <label for="nom" style="color:white";>Nom</label>
                 <input type="text" id="nom" required>
             </div>
             <div class="form-group">
-                <label for="prenom">Prénom</label>
+                <label for="prenom" style="color:white";>Prénom</label>
                 <input type="text" id="prenom" required>
             </div>
             <div class="form-group">
-                <label for="annee_etude">Année d'étude</label>
+                <label for="annee_etude" style="color:white";>Année d'étude</label>
                 <select id="annee_etude" required>
                     <option value="">Sélectionnez votre année</option>
                     <option value="Licence 1">Licence 1</option>
@@ -45,7 +45,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="filiere">Filière</label>
+                <label for="filiere" style="color:white";>Filière</label>
                 <select id="filiere" required>
                     <option value="">Sélectionnez votre filière</option>
                     <option value="Statistique Appliquée">Statistique Appliquée</option>
@@ -53,18 +53,18 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="telephone">Numéro WhatsApp</label>
+                <label for="telephone" style="color:white";>Numéro WhatsApp</label>
                 <input type="tel" id="telephone" required pattern="[0-9+ ]+">
             </div>
             <div class="form-group">
-                <label for="montant">Montant payé (CFA)</label>
+                <label for="montant" style="color:white";>Montant payé (CFA)</label>
                 <input type="number" id="montant" required min="0">
             </div>
-            <button type="submit" class="submit-btn">Enregistrer</button>
+            <button type="submit" class="submit-btn" style="color:white";>Enregistrer</button>
         </form>
 
         <div id="confirmation" class="confirmation hidden">
-            <h2>Inscription réussie ! 🎉</h2>
+            <h2>Inscription réussie ! </h2>
             <p>Votre participation au picnic a été enregistrée.</p>
         </div>
     </div>
@@ -86,4 +86,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
