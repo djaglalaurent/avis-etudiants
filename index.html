@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title style="color:white";>Plateforme Picnic Étudiants 2025</title>
+    <title>Plateforme Picnic Étudiants 2025</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-    <header>
-        <h1 style="color:white";>Plateforme Picnic Étudiants 2025</h1>
-        <p style="color:white";>Inscription et gestion des participants</p>
-    </header>
-
-    <div class="tabs">
-        <button class="tab active" onclick="showTab('formulaire')" style="color:white";>Inscription</button>
-        <button class="tab" onclick="showTab('admin')" style="color:white";>Accès Admin</button>
+    <!-- CADRANT PLATEFORME -->
+    <div class="platform-card">
+        <h1>Plateforme Picnic Étudiants 2025</h1>
+        <p>Gestion des participants et inscriptions</p>
     </div>
 
-    <!-- FORMULAIRE -->
-    <div id="formulaire" class="tab-content active">
+    <!-- FORMULAIRE INSCRIPTION -->
+    <div class="form-card">
+        <h2 class="form-title">Inscription</h2>
+
         <form id="picnicForm" class="picnic-form">
             <div class="form-group">
-                <label for="nom" style="color:white";>Nom</label>
+                <label for="nom">Nom</label>
                 <input type="text" id="nom" required>
             </div>
             <div class="form-group">
-                <label for="prenom" style="color:white";>Prénom</label>
+                <label for="prenom">Prénom</label>
                 <input type="text" id="prenom" required>
             </div>
             <div class="form-group">
-                <label for="annee_etude" style="color:white";>Année d'étude</label>
+                <label for="annee_etude">Année d'étude</label>
                 <select id="annee_etude" required>
                     <option value="">Sélectionnez votre année</option>
                     <option value="Licence 1">Licence 1</option>
@@ -45,7 +41,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="filiere" style="color:white";>Filière</label>
+                <label for="filiere">Filière</label>
                 <select id="filiere" required>
                     <option value="">Sélectionnez votre filière</option>
                     <option value="Statistique Appliquée">Statistique Appliquée</option>
@@ -53,31 +49,35 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="telephone" style="color:white";>Numéro WhatsApp</label>
+                <label for="telephone">Numéro WhatsApp</label>
                 <input type="tel" id="telephone" required pattern="[0-9+ ]+">
             </div>
             <div class="form-group">
-                <label for="montant" style="color:white";>Montant payé (CFA)</label>
+                <label for="montant">Montant payé (CFA)</label>
                 <input type="number" id="montant" required min="0">
             </div>
-            <button type="submit" class="submit-btn" style="color:white";>Enregistrer</button>
+            <button type="submit" class="submit-btn">Soumettre</button>
         </form>
 
         <div id="confirmation" class="confirmation hidden">
-            <h2>Inscription réussie ! </h2>
+            <h3>Inscription réussie ! 🎉</h3>
             <p>Votre participation au picnic a été enregistrée.</p>
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="admin" class="tab-content">
-        <div class="admin-section">
-            <h2>Gestion des participants</h2>
-            <div class="search-group">
-                <input type="text" id="searchName" placeholder="Tapez un nom pour rechercher">
-                <button onclick="searchParticipant()">Rechercher</button>
-            </div>
-            <div id="adminList" class="admin-list"></div>
+    <!-- CADRANT ADMIN -->
+    <div class="admin-card">
+        <h2>Accès Admin</h2>
+
+        <div class="search-group">
+            <input type="text" id="searchName" placeholder="Tapez un nom pour rechercher">
+            <button onclick="searchParticipant()">Rechercher</button>
+        </div>
+        <div id="adminList" class="admin-list"></div>
+
+        <div class="export-buttons">
+            <button onclick="exportJSON()">Exporter JSON</button>
+            <button onclick="exportCSV()">Exporter CSV</button>
         </div>
     </div>
 
@@ -86,5 +86,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
