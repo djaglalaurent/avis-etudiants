@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ffd2d2, #ffe4e1); /* Rose doux */
+    background: white; /* Rose doux */
     color: #333;
     min-height: 100vh;
     padding: 20px;
@@ -17,7 +17,7 @@ body {
 .platform-card {
     max-width: 700px;
     margin: 0 auto 30px auto;
-    background: #ffb6b9;
+    background: #900c3f;
     padding: 30px;
     border-radius: 20px;
     text-align: center;
@@ -39,10 +39,10 @@ body {
 .form-card {
     max-width: 700px;
     margin: 0 auto 30px auto;
-    background: #ffe4e1;
+    background: #900c3f;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: pink;
+    box-shadow: rgb(235, 152, 166);
 }
 
 .form-title {
@@ -114,7 +114,7 @@ body {
 .admin-card {
     max-width: 700px;
     margin: 0 auto 30px auto;
-    background: #ffb6b9;
+    background: #900c3f;
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
@@ -213,4 +213,5 @@ body {
         width: 100%;
     }
 }
+
 
