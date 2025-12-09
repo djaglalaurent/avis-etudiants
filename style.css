@@ -101,7 +101,7 @@ body {
 .confirmation {
     text-align: center;
     padding: 20px;
-    background: #ffdad9;
+    background: #f57874;
     border: 2px solid #900c3f;
     border-radius: 12px;
     color: #900c3f;
@@ -213,4 +213,3 @@ body {
         width: 100%;
     }
 }
-
