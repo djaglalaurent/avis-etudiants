@@ -57,18 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- RENDRE LES MATCHES (la fonction reçoit un tableau d'objets {p, index}) ---
+  // --- RENDRE LES MATCHES ---
   function renderMatches(matches) {
     adminList.innerHTML = '';
-    if (!matches || matches.length === 0) return; // ne rien afficher si aucun match
+    if (!matches || matches.length === 0) return;
 
     matches.forEach(item => {
       const p = item.p;
-      const idx = item.index; // index réel dans participants
+      const idx = item.index;
 
       const div = document.createElement('div');
       div.className = 'participant';
-      // on stocke data-index pour éviter toute confusion
       div.innerHTML = `
         <span>${escapeHtml(p.nom)} ${escapeHtml(p.prenom)} - ${escapeHtml(p.annee)} - ${escapeHtml(p.filiere)} - ${escapeHtml(p.telephone)} - ${escapeHtml(p.montant)} CFA</span>
         <button class="delete-btn" data-index="${idx}">Supprimer</button>
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Suppression : on utilise délégation d'événements sur adminList ---
+  // --- Suppression avec délégation d'événements ---
   adminList.addEventListener('click', function (ev) {
     const btn = ev.target.closest('button.delete-btn');
     if (!btn) return;
@@ -86,11 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!confirm("Voulez-vous vraiment supprimer ce participant ?")) return;
 
-    // suppression réelle
     participants.splice(idx, 1);
     save();
 
-    // Après suppression, relancer la recherche actuelle (si présente) sinon vider l'affichage
+    // Relancer la recherche actuelle si existante
     const currentQuery = searchInput ? searchInput.value.trim() : '';
     if (currentQuery === '') {
       clearAdminList();
@@ -110,18 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     performSearchAndRender(query);
   };
 
-  // Effectue la recherche (sans modifier le champ) et affiche les matches
+  // --- Effectue la recherche et affiche les matches ---
   function performSearchAndRender(query) {
     const q = query.toLowerCase();
     const matches = participants
       .map((p, idx) => ({ p, idx }))
-      .filter(item => {
-        const full = (item.p.nom + ' ' + item.p.prenom).toLowerCase();
-        return full.includes(q);
-      })
+      .filter(item => (item.p.nom + ' ' + item.p.prenom).toLowerCase().includes(q))
       .map(it => ({ p: it.p, index: it.idx }));
 
-    // Si aucun match => ne rien afficher
     if (matches.length === 0) {
       clearAdminList();
       return;
@@ -130,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMatches(matches);
   }
 
-  // --- Export JSON (exposé globalement si appelé depuis HTML) ---
+  // --- Export JSON ---
   window.exportJSON = function () {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(participants, null, 2));
     const dlAnchor = document.createElement('a');
@@ -143,7 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.exportCSV = function () {
     if (!participants.length) return;
     const headers = ['nom', 'prenom', 'annee', 'filiere', 'telephone', 'montant'];
-    const rows = participants.map(p => headers.map(h => `"${(p[h] || '').toString().replace(/"/g, '""')}"`).join(',')).join('\n');
+    const rows = participants.map(p =>
+      headers.map(h => `"${(p[h] || '').toString().replace(/"/g, '""')}"`).join(',')
+    ).join('\n');
     const csvStr = "data:text/csv;charset=utf-8," + encodeURIComponent(headers.join(',') + '\n' + rows);
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute('href', csvStr);
@@ -151,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dlAnchor.click();
   };
 
-  // --- Petit helper pour l'affichage sécurisé ---
+  // --- Helper pour affichage sécurisé ---
   function escapeHtml(text) {
     if (!text) return '';
     return text.replace(/[&<>"'`=\/]/g, function (s) {
@@ -168,6 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Au chargement, on s'assure que la liste admin est vide (pas d'affichage automatique)
+  // Au chargement, s'assurer que la liste admin est vide
   clearAdminList();
 });
