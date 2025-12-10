@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // récupération de toutes les valeurs
       const nom = document.getElementById('nom')?.value.trim();
       const prenom = document.getElementById('prenom')?.value.trim();
-      const annee = document.getElementById('annee_etude')?.value;
       const filiere = document.getElementById('filiere')?.value;
       const telephone = document.getElementById('telephone')?.value.trim();
       const montant = document.getElementById('montant')?.value;
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const participant = { nom, prenom, annee, filiere, telephone, montant };
+      const participant = { nom, prenom, filiere, telephone, montant };
 
       participants.push(participant);
       save();
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div');
       div.className = 'participant';
       div.innerHTML = `
-        <span>${escapeHtml(p.nom)} ${escapeHtml(p.prenom)} - ${escapeHtml(p.annee)} - ${escapeHtml(p.filiere)} - ${escapeHtml(p.telephone)} - ${escapeHtml(p.montant)} CFA</span>
+        <span>${escapeHtml(p.nom)} ${escapeHtml(p.prenom)} - ${escapeHtml(p.filiere)} - ${escapeHtml(p.telephone)} - ${escapeHtml(p.montant)} CFA</span>
         <button class="delete-btn" data-index="${idx}">Supprimer</button>
       `;
       adminList.appendChild(div);
@@ -120,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.exportCSV = function () {
     if (!participants.length) return;
-    const headers = ['nom', 'prenom', 'annee', 'filiere', 'telephone', 'montant'];
+    const headers = ['nom', 'prenom', 'annee', 'telephone', 'montant'];
     const rows = participants.map(p =>
       headers.map(h => `"${(p[h] || '').toString().replace(/"/g, '""')}"`).join(',')
     ).join('\n');
@@ -147,3 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   clearAdminList();
 });
+
